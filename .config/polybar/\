@@ -1,0 +1,27 @@
+import dbus
+ICON = "\x00e05c "
+
+#bus = dbus.SessionBus()
+#player = bus.get_object('org.mpris.MediaPlayer2.spotify', '/org/mpris/MediaPlayer2')
+#interface = dbus.Interface(proxy, dbus_interface='org.mpris.MediaPlayer2.Player')
+#properties = dbus.Interface(proxy, dbus_interface='org.freedesktop.DBus.Properties')
+# props_iface.GetAll("org.mpris.MediaPlayer2.Player")
+
+def getCurrentPlayerStatus():
+    bus = dbus.SessionBus()
+    player = bus.get_object('org.mpris.MediaPlayer2.spotify', '/org/mpris/MediaPlayer2')
+    properties = dbus.Interface(player, dbus_interface='org.freedesktop.DBus.Properties')
+
+    return properties.GetAll('org.mpris.MediaPlayer2.Player')
+
+playerStatus = getCurrentPlayerStatus()
+if playerStatus['PlaybackStatus'] == 'Playing':
+    metadata = playerStatus['Metadata']
+    title = metadata['xesam:title']
+    album = metadata['xesam:album']
+    artist = metadata['xesam:artist'][0]
+
+    print(("(" + ICON + "\"{} : {}, from the Album: {}\")".format(artist, title, album)).encode("utf-8"))
+else:
+    print("(" + ICON + "\"Spotify Paused or closed\")")
+

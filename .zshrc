@@ -36,17 +36,38 @@ setopt nohashdirs           # disable hashing of dirs so we don't have to run
 # Key stuff
 bindkey -e
 
+#history
 bindkey '^[[A' history-beginning-search-backward
 bindkey '^[[B' history-beginning-search-forward
 
+#incremental search
+bindkey '^[[1;5A' history-incremental-search-backward
+bindkey '^[[1;5B' history-incremental-search-forward
+
+#control left/right -> movement by char
+bindkey '^[[1;5C' forward-char
+bindkey '^[[1;5D' backward-char
+
+##vim movements with control
+#control hjkl -> leftdownupright
+bindkey '^H' vi-backward-char
+bindkey '^L' vi-forward-char
+
+bindkey '^K' history-beginning-search-backward
+bindkey '^J' history-beginning-search-forward
+
+#word movement
+bindkey '^B' vi-backward-word
+bindkey '^E' vi-forward-word
+
+#word movement
+
 bindkey '^[OC' emacs-forward-word
 #bindkey '^[[C' emacs-forward-word
-bindkey '^[[1;5C' emacs-forward-word
 bindkey '^[[1;3C' emacs-forward-word
 
 bindkey '^[OD' emacs-backward-word
 #bindkey '^[[D' emacs-backward-word
-bindkey '^[[1;5D' emacs-backward-word
 bindkey '^[[1;3D' emacs-backward-word
 
 bindkey '^[[3~' delete-char
