@@ -3,4 +3,7 @@ Some simple dotfiles for my linux setup:
 
 packages: zsh emacs vim firefox discord weechat spotify
 
-also needed: i3-gaps polybar spacemacs
+also needed: 
+- i3-gaps polybar spacemacs 
+- fonts: siji, FontAwesome, ubuntu (mono)
+
