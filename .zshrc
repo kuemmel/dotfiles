@@ -177,6 +177,10 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 
+alias cal='gcalcli calw 1'
+alias pdf='zathura'
+alias music='cmus'
+
 alias :q=exit
 
 alias k='k --no-vcs -Ah'

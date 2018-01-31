@@ -133,7 +133,7 @@ bindsym $mod+Shift+e move workspace to output right
 bindsym $mod+Shift+q move workspace to output left 
 
 # resize window (you can also use the mouse for that)
-mode "resize" {
+mode "(resize)" {
         bindsym j           resize shrink width 10 px or 10 ppt
         bindsym k           resize grow height 10 px or 10 ppt
         bindsym l           resize shrink height 10 px or 10 ppt
@@ -151,6 +151,23 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+set $mode_apps "e→nautilus f→firefox m→cmus p→pavucontrol s→emacs v→vim z→zathura q→quit"
+mode $mode_apps {
+        # back to normal: Enter or Escape
+        bindsym e exec nautilus; mode "default"
+	bindsym f exec firefox; mode "default"
+	bindsym m exec exec gnome-terminal  -- cmus; mode "default"
+	bindsym p exec pavucontrol; mode "default"
+	bindsym s exec emacs; mode "default"
+	bindsym v exec gvim; mode "default"
+	bindsym z exec zathura; mode "default"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+	bindsym q mode "default"
+}
+
+bindsym $mod+p mode $mode_apps 
+
 ##
 # start up
 ##
@@ -159,12 +176,13 @@ bindsym $mod+r mode "resize"
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # setup
 exec --no-startup-id nitrogen --restore
-exec --no-startup-id xset r rate 200 30
+exec --no-startup-id xset r rate 200 50
 exec --no-startup-id xset +fp $HOME/.fonts
 exec --no-startup-id xset fp rehash
 exec --no-startup-id gnome-session
 exec --no-startup-id $HOME/.config/i3/screen.sh 
-# exec --no-startup-id xcompmgr '-cf -I 0.1 -O 0.1'
+exec --no-startup-id /usr/bin/udisksctl mount -b /dev/sdb0
+exec --no-startup-id xcompmgr -cf -I 0.1 -O 0.1
 exec --no-startup-id redshift -l 54.44:9.97 -t 5700:3600 -g 0.8 -m randr -v
 
 # apps
@@ -172,3 +190,15 @@ exec --no-startup-id i3-msg 'workspace 1; exec telegram'
 exec --no-startup-id i3-msg 'workspace 1; exec discord'
 exec --no-startup-id i3-msg 'workspace 1; exec gnome-terminal -- weechat'
 exec --no-startup-id i3-msg 'workspace 2; exec firefox'
+# move to workspaces
+assign [class="Firefox"] workspace 1
+assign [class="Discord"] workspace 5
+assign [class="Gnome-Terminal"] workspace 5
+assign [class="Skype"] workspace 5
+
+## setup bt stuff
+# bluetoothctl scan / pair / connect -> setup connection
+# pactl list cards -> get id
+# pacmd set-card-profile <id> a2dp_sink -> set high quality bt
+
+

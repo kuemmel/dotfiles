@@ -9,11 +9,12 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #cc000000
-background-alt = #444
+background = #55000000
+background-alt = #55000000
 ;foreground = ${xrdb:color7:#222}
 foreground = #ccffffff
 foreground-alt = #ddff1023
+foreground-i3 = #ffb52a
 primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
@@ -22,7 +23,8 @@ alert = #bd2c40
 monitor = ${env:MONITOR:DP-0}
 width = 100%
 height = 27
-radius = 6.0
+;radius = 6.0
+radius = 0
 fixed-center = false
 background = #cc000000
 foreground = ${colors.foreground}
@@ -30,7 +32,7 @@ foreground = ${colors.foreground}
 line-size = 3
 line-color = #f00
 
-border-size = 4
+border-size = 0
 border-color = #00000000
 
 padding-left = 0
@@ -40,13 +42,14 @@ module-margin-left = 1
 module-margin-right = 2
 
 font-0 = Ubuntu Mono:pixelsize=12;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=10;1
-font-3 = FontAwesome:size=8;-2
+font-1 = unifont:fontformat=truetype:pixelsize=12:antialias=false;1
+font-2 = siji:pixelsize=12;0
+font-3 = FontAwesome:pixelsize=12;0
+font-4 = unifont:fontformat=truetype:size=8:antialias=true;1
 
 modules-left = i3
 modules-center = xwindow
-modules-right = filesystem volume xkeyboard memory cpu temperature date redshift powermenu
+modules-right = filesystem memory cpu temperature redshift date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -68,7 +71,7 @@ foreground = ${colors.foreground}
 line-size = 3
 line-color = #f00
 
-border-size = 4
+border-size = 0
 border-color = #00000000
 
 padding-left = 0
@@ -101,7 +104,7 @@ foreground = ${colors.foreground}
 line-size = 3
 line-color = #f00
 
-border-size = 4
+border-size = 0
 border-color = #00000000
 
 padding-left = 0
@@ -165,11 +168,13 @@ label-unmounted-foreground = ${colors.foreground-alt}
 type = internal/bspwm
 
 label-focused = %index%
-label-focused-background = ${colors.background-alt}
+label-focused-background = ${colors.background}
+label-focused-foreground = ${colors.foreground-i3}
 label-focused-underline= ${colors.primary}
 label-focused-padding = 2
 
 label-occupied = %index%
+label-occupied-underline= ${colors.primary}
 label-occupied-padding = 2
 
 label-urgent = %index%!
@@ -197,6 +202,8 @@ label-mode-background = ${colors.primary}
 label-focused = %index%
 label-focused-background = ${module/bspwm.label-focused-background}
 label-focused-padding = ${module/bspwm.label-focused-padding}
+label-focused-underline = ${module/bspwm.label-focused-underline}
+label-focused-foreground = ${module/bspwm.label-focused-foreground}
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %index%
@@ -204,7 +211,8 @@ label-unfocused-padding = ${module/bspwm.label-occupied-padding}
 
 ; visible = Active workspace on unfocused monitor
 label-visible = %index%
-label-visible-background = ${self.label-focused-background}
+label-visible-background = ${colors.background}
+label-visible-foreground = ${colors.foreground-i3}
 label-visible-padding = ${self.label-focused-padding}
 
 ; urgent = Workspace with urgency hint set
@@ -215,17 +223,41 @@ label-urgent-padding = ${module/bspwm.label-urgent-padding}
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " "
+;format-prefix = " "
+format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-label = %percentage%%
-label-active-font = 3
+# label = %percentage%%
+label-active-font = 4
+format = <ramp-coreload>
+ramp-coreload-0 = ▁
+ramp-coreload-1 = ▂
+ramp-coreload-2 = ▃
+ramp-coreload-3 = ▄
+ramp-coreload-4 = ▅
+ramp-coreload-5 = ▆
+ramp-coreload-6 = ▇
+ramp-coreload-7 = █
 
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
+;format-prefix = " "
+
+format-prefix ="  "
 format-prefix-foreground = ${colors.foreground-alt}
-label = %percentage_used%%
+; label = %percentage_used%%
+label-active-font = 4
+format = <bar-used>
+; Only applies if <bar-used> is used
+bar-used-indicator =
+bar-used-width = 9
+bar-used-foreground-0 = #55aa55
+bar-used-foreground-1 = #557755
+bar-used-foreground-2 = #f5a70a
+bar-used-foreground-3 = #ff5555
+bar-used-fill = ▐
+bar-used-empty = ▐
+bar-used-empty-foreground = #444444
 
 [module/date]
 type = internal/date
@@ -237,10 +269,10 @@ date-alt = "%d.%m.%Y"
 time = %H:%M
 time-alt = %H:%M:%S
 
-format-prefix =  
+format-prefix = 
 format-prefix-foreground = ${colors.foreground-alt}
 
-label = " %time%  %date%"
+label = " %time%  %date%"
 
 [module/volume]
 type = internal/volume
@@ -278,7 +310,7 @@ exec = ~/.config/polybar/redshift.sh
 
 [module/spotify]
 type = custom/script
-interval = 10
+interval = 5
 exec = python ~/.config/polybar/spotify.py
 label = %output%
 format = ( <label>)
@@ -309,9 +341,9 @@ label = %temperature%
 label-warn = %temperature%
 label-warn-foreground = ${colors.secondary}
 
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
+ramp-0 = 
+ramp-1 =  
+ramp-2 = 
 ramp-foreground = ${colors.foreground-alt}
 
 [module/powermenu]
@@ -319,7 +351,8 @@ type = custom/menu
 
 format-spacing = 1
 
-label-open = 
+;label-open = 
+label-open = 
 label-open-foreground = ${colors.secondary}
 label-close =  cancel
 label-close-foreground = ${colors.secondary}
