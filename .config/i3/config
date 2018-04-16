@@ -133,8 +133,9 @@ bindsym $mod+Shift+F12 exec "i3-nagbar -t warning -m 'You pressed the exit short
 
 # move workspace to monitor left/right
 # also https://i3wm.org/docs/user-contributed/swapping-workspaces.html
-bindsym $mod+Shift+e move workspace to output right
-bindsym $mod+Shift+q move workspace to output left 
+bindsym $mod+Shift+e move workspace to output $monitor_right
+bindsym $mod+Shift+w move workspace to output $monitor_main
+bindsym $mod+Shift+q move workspace to output $monitor_left
 
 # resize window (you can also use the mouse for that)
 mode "(resize)" {
