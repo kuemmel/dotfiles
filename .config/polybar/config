@@ -50,7 +50,7 @@ font-4 = unifont:fontformat=truetype:size=8:antialias=true;1
 modules-left = i3
 ;modules-center = xwindow
 modules-center = spotify
-modules-right = filesystem memory cpu temperature redshift date powermenu
+modules-right = filesystem temperature redshift date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -160,6 +160,7 @@ type = internal/fs
 interval = 25
 
 mount-0 = /
+mount-1 = /home
 
 label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
@@ -311,8 +312,8 @@ exec = ~/.config/polybar/redshift.sh
 
 [module/spotify]
 type = custom/script
-interval = 5
-exec = python ~/.config/polybar/spotify.py
+interval = 2
+exec = python2 ~/.config/polybar/spotify.py
 label = %output%
 format = ( <label>)
 label-active-font = 2

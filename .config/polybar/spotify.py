@@ -47,8 +47,8 @@ def displayStatus(playerStatus):
         artist = metadata['xesam:artist']
 
     print("{}{}{} (by {}{}{}) (album {}{}{})"
-          .format(COLOR_PRIMARY, title, COLOR_CLOSE, COLOR_SECONDARY,
-                  artist, COLOR_CLOSE, COLOR_ALT, album, COLOR_CLOSE))
+          .format(COLOR_PRIMARY, title.encode("utf8"), COLOR_CLOSE, COLOR_SECONDARY,
+                  artist.encode("utf8"), COLOR_CLOSE, COLOR_ALT, album.encode("utf8"), COLOR_CLOSE))
 
 playerStatus = getCurrentPlayerStatusFromSpotify() or getCurrentPlayerStatusFromCMus()
 if playerStatus['PlaybackStatus'] == 'Playing':

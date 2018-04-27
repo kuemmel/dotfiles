@@ -200,7 +200,7 @@ exec --no-startup-id i3-msg 'workspace 1; exec gnome-terminal -- weechat'
 exec --no-startup-id i3-msg 'workspace 2; exec firefox'
 
 # move to workspaces
-assign [class="telegram"] workspace 5
+assign [class="TelegramDesktop"] workspace 5
 assign [class="discord"] workspace 5
 assign [class="spotify"] workspace 5
 assign [class="Gnome-terminal"] workspace 5
@@ -208,7 +208,7 @@ assign [class="Skype"] workspace 5
 
 # assign workspaces to monitors
 workspace 5 output $monitor_right
-workspace 6 output $monitor_left
+workspace 8 output $monitor_left
 
 ## setup bt stuff
 # bluetoothctl scan / pair / connect -> setup connection

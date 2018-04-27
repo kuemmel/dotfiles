@@ -7,7 +7,9 @@ export LC_TIME=de_DE.UTF-8
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
 export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
-# Workaround for core-utils not currently supporting termite
+alias python=python3
+
+ #Workaround for core-utils not currently supporting termite
 if [[ -n $TMUX ]]; then
     export TERM=tmux-256color
 elif $(tput -T xterm-termite colors &> /dev/null); then
