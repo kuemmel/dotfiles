@@ -49,7 +49,7 @@ font-4 = unifont:fontformat=truetype:size=8:antialias=true;1
 
 modules-left = i3
 modules-center = xwindow
-modules-right = filesystem temperature redshift date powermenu
+modules-right = filesystem temperature redshift date weathericons battery
 
 tray-position = right
 tray-padding = 2
@@ -190,7 +190,7 @@ exec = ~/.config/polybar/redshift.sh
 type = custom/script
 interval = 10
 format = <label>
-exec = python ~/.config/polybar/weathericons
+exec = python3 ~/.config/polybar/weathericons
 
 [module/temperature]
 type = internal/temperature
@@ -201,6 +201,70 @@ format-warn = <ramp> <label-warn>
 label = %temperature%
 label-warn = %temperature%
 label-warn-foreground = ${colors.secondary}
+
+[module/battery]
+type = internal/battery
+full-at = 99
+battery = BAT0
+adapter = AC
+poll-interval = 5
+; see "man date" for details on how to format the time string
+; NOTE: if you want to use syntax tags here you need to use %%{...}
+; Default: %H:%M:%S
+time-format = %H:%M
+
+; Available tags:
+;   <label-charging> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+;   <animation-charging>
+format-charging = <animation-charging>
+
+; Available tags:
+;   <label-discharging> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+;   <animation-discharging>
+format-discharging = <ramp-capacity>
+
+; Available tags:
+;   <label-full> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+;format-full = <ramp-capacity> <label-full>
+
+; Available tokens:
+;   %percentage% (default)
+;   %time%
+;   %consumption% (shows current charge rate in watts)
+label-charging = CHARGE %percentage%%
+; Available tokens:
+;   %percentage% (default)
+label-full = FULL
+; Only applies if <ramp-capacity> is used
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+; Only applies if <bar-capacity> is used
+bar-capacity-width = 10
+; Only applies if <animation-charging> is used
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+; Framerate in milliseconds
+animation-charging-framerate = 750
+; Only applies if <animation-discharging> is used
+animation-discharging-0 = 
+animation-discharging-1 = 
+animation-discharging-2 = 
+animation-discharging-3 = 
+animation-discharging-4 = 
+; Framerate in milliseconds
+animation-discharging-framerate = 500
 
 [module/powermenu]
 type = custom/menu
