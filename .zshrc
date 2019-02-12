@@ -185,6 +185,10 @@ alias :q=exit
 
 alias k='k --no-vcs -Ah'
 
+
+path+=('$HOME/bin')
+source $HOME/.poetry/env
+
 segfault_hook () {
     if [ $? -eq 139 ]; then
         mpg123 -q ~/.zgen/Scheisssoeee.mp3

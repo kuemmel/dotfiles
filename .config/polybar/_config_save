@@ -61,7 +61,7 @@ tray-padding = 2
 wm-restack = i3
 
 [bar/left]
-monitor = ${env:MONITOR:DVI-I-1}
+monitor = ${env:MONITOR:HDMI-0}
 width = 100%
 height = 27
 radius = 6.0
@@ -93,7 +93,7 @@ modules-right = date powermenu
 wm-restack = i3
 
 [bar/right]
-monitor = ${env:MONITOR:HDMI-0}
+monitor = ${env:MONITOR:DVI-I-0}
 width = 100%
 height = 27
 radius = 6.0
@@ -320,7 +320,7 @@ exec = ~/.config/polybar/redshift.sh
 
 [module/spotify]
 type = custom/script
-interval = 0.5
+interval = 2
 exec = python2 ~/.config/polybar/spotify.py
 label = %output%
 format = (♫ <label>)
