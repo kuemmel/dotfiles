@@ -1,0 +1,93 @@
+
+" Setup
+let g:solarized_termcolors=256
+set termguicolors
+
+set laststatus=2
+set number
+set textwidth=80
+au BufRead,BufNewFile *.org setlocal textwidth=160
+au BufRead,BufNewFile *.org setlocal colorcolumn=160
+set colorcolumn=80
+
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
+" Leader set to space
+nnoremap <Space> <Nop>
+let mapleader=" "
+set timeoutlen=500
+
+" Plugins, use vim plug
+call plug#begin('~/.vim/plugged')
+Plug 'jceb/vim-orgmode'
+Plug 'tpope/vim-speeddating'
+Plug 'posva/vim-vue'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf', { 'dir': '~/os/fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'mattn/emmet-vim'
+Plug 'scrooloose/nerdtree'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-surround'
+Plug 'w0rp/ale'
+Plug 'jez/vim-colors-solarized'
+Plug 'sheerun/vim-polyglot'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+call plug#end()
+
+" setup colorscheme
+syntax enable
+set background=dark
+set t_Co=256
+colorscheme solarized
+
+" set up ale (linting)
+let g:ale_linters = {
+\   'javascript': ['standard'],
+\}
+let g:ale_fixers = {'javascript': ['standard']}
+
+let g:ale_lint_on_save = 1
+let g:ale_fix_on_save = 1
+
+
+" Setup fxf
+nnoremap <C-p> :Files<CR>
+nnoremap <Leader>b :Buffers<CR>
+nnoremap <Leader>h :History<CR>
+nnoremap <Leader>t :BTags<CR>
+nnoremap <Leader>T :Tags<CR>
+
+
+" Setup lightline
+let g:lightline = {
+	\ 'colorscheme':'solarized',
+	\ }
+
+set guioptions-=m  "menu bar
+set guioptions-=T  "toolbar
+set guioptions-=r  "scrollbar
+
+" Tab stuff
+nnoremap <C-Left> :tabprevious<CR>
+nnoremap <C-Right> :tabnext<CR>
+nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
+nnoremap <silent> <A-Right> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
+nnoremap th  :tabfirst<CR>
+nnoremap tk  :tabnext<CR>
+nnoremap tj  :tabprev<CR>
+nnoremap tl  :tablast<CR>
+nnoremap tt  :tabedit<Space>
+nnoremap tn  :tabnext<Space>
+nnoremap tm  :tabm<Space>
+nnoremap td  :tabclose<CR>
+" Alternatively use
+"nnoremap th :tabnext<CR>
+"nnoremap tl :tabprev<CR>
+"
